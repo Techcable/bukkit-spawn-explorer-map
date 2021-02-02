@@ -1,0 +1,19 @@
+name: spawn_explorer_map
+main: net.techable.bukkit.spawn_explorer_map.ExplorerMap
+version: 0.1.0
+author: Techcable
+commands:
+  spawnExplorerMap:
+    description: Spawns an Explorer Map, which is normally only available from villagers and chests.
+    usage: /spawnExplorerMap
+    permission: spawn_explorer_map.spawn
+    permissionMessage: You don't have permission to spawn explorer maps
+permissions:
+  spawn_explorer_map.spawn:
+    description: Allows you to spawn explorer maps
+    default: op
+    children:
+      spawn_explorer_map.spawn.others: true
+  spawn_explorer_map.spawn.others:
+    description: Allows you to spawn explorer maps for others
+    default: op
