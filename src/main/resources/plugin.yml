@@ -1,5 +1,5 @@
 name: spawn_explorer_map
-main: net.techable.bukkit.spawn_explorer_map.ExplorerMap
+main: net.techcable.bukkit.spawn_explorer_map.ExplorerMap
 version: 0.1.0
 author: Techcable
 commands:
