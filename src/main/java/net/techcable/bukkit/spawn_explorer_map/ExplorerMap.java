@@ -5,6 +5,8 @@ import java.util.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class ExplorerMap extends JavaPlugin {
@@ -152,9 +154,15 @@ public final class ExplorerMap extends JavaPlugin {
             assert desiredAmount >= 1;
             assert target != null;
             assert desiredType != null;
+            PlayerInventory inventory = target.getInventory();
             sender.sendMessage("Giving " + desiredAmount + " explorer maps to " + target.getName());
             for (int i = 0; i < desiredAmount; i++) {
-                getServer().createExplorerMap(target.getWorld(), target.getLocation(), desiredType);
+                ItemStack stack = getServer().createExplorerMap(target.getWorld(), target.getLocation(), desiredType);
+                Map<Integer, ItemStack> failedToPlace = inventory.addItem(stack);
+                if (!failedToPlace.isEmpty()) {
+                    sender.sendMessage("Insufficient room to place #" + (i + 1) + " in inventory of " + target.getName());
+                    return true;
+                }
             }
             return true; // handled :)
         }
